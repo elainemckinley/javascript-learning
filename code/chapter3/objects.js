@@ -82,5 +82,4 @@ console.log(foo.firstName);
 // application to use.
 // This helps to avoid conflict with other applications and libraries.
 var MYAPP = {};
-
 MYAPP.thing = 'a thing'; // etc.
