@@ -117,3 +117,41 @@ try {
 } catch(e) {
   console.log('exception of type ' + e.name + ' caught.');
 }
+
+// X. Augmenting Types
+// Similar to how adding a method to Object.prototype makes that method available to all objects,
+// you can add methods to arrays, functions, strings, number, regexes, and booleans.
+
+Function.prototype.method = function(name, func) {
+  this.prototype[name] = func;
+  return this;
+};
+// Now we don't have to type 'prototype' each time we want to modify a method.
+
+Number.method('integer', function() {
+  return Math[this < 0 ? 'ceil' : 'floor'](this);
+});
+
+console.log((-10/3).integer());
+
+// Remove spaces from the end of a string:
+String.method('trim', function() {
+  return this.replace(/^\s+|\s+$/g, '');
+});
+
+console.log('**************                  '.trim() + 'no spaces before this');
+
+// XI. Recursion
+var hanoi = function hanoi(disc, src, aux, dst) {
+  if (disc > 0) {
+    hanoi(disc - 1, src, dst, aux);
+    console.log('Move disc ' + disc + ' from ' + src + ' to ' + dst);
+    hanoi(disc - 1, aux, src, dst);
+  }
+};
+
+hanoi(3, 'src', 'aux', 'dst');
+
+// Javascript does not offer tail recursion optimization.
+
+// XII. Scope
