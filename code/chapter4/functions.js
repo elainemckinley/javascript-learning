@@ -155,3 +155,56 @@ hanoi(3, 'src', 'aux', 'dst');
 // Javascript does not offer tail recursion optimization.
 
 // XII. Scope
+// Javascript does not have block scope, but it does have function scope.
+{
+  seven = '7';
+}
+console.log(seven); // prints '7'
+
+var foo = new function(eight) {
+  eight = '8'
+  nine = '9'
+};
+// console.log(eight); // eight is not defined.
+console.log(nine); // nine is defined.
+
+// for this reason it's usually advisable to declare all variables used in a function
+// at the top of the function body.
+
+// XIII. Closure
+// TODO: come back to this section, a bit confusing at the moment.
+var myObject = (function() {
+  var value = 0;
+
+  return {
+    increment: function(inc) {
+      value += typeof inc === 'umber' ? inc : 1;
+    },
+    getValue: function() {
+      return value;
+    }
+  };
+}());
+
+var quo = function(status) {
+  return {
+    get_status: function() {
+      return status;
+    }
+  };
+};
+
+var myQuo = quo('amazed');
+console.log(myQuo.get_status());
+console.log(myQuo.status); // undefined
+
+// The quo function has access to the context which it was created.
+// This is called closure.
+
+// Avoid creating functions within a loop.
+
+// XIV. Callbacks
+// TODO: also revisit this section. Unclear what is happening in the code example.
+
+// XV. Module
+// A module is a function or object that presents an interface, but hides its state and impl.
